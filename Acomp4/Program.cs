@@ -18,27 +18,18 @@ namespace Acomp4
             [Params(100, 1000, 10000)]
             public int N { get; set; }
 
-            public static int rootItem, addItem, removeItem, firstItem;
+            public static int removeItem, firstItem;
 
             [GlobalSetup]
             public void Setup()
             {
                 int[] array = new RandomArray(N).Array;
-                rootItem = array[0];
-                addItem = new Random().Next(0, N-1);
-                removeItem = array[N/2];
-                firstItem = array[addItem];
+                removeItem = firstItem = array[N/2];
                 root.Clear();
                 foreach (int item in array)
                 {
                     root.Add(item);
                 }
-            }
-
-            [Benchmark]
-            public void AddTest()
-            {
-                root.Add(addItem);
             }
 
             [Benchmark]
